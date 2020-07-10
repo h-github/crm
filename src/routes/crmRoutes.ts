@@ -1,10 +1,14 @@
 import { Express } from "express-serve-static-core";
 
-import { addNewContact, getContacts } from "../controllers/crmController";
+import {
+  addNewContact,
+  getContacts,
+  getContactById,
+} from "../controllers/crmController";
 
 const routes = (app: Express) => {
   app
-    .route("/contact")
+    .route("/contacts")
     .get((req, res, next) => {
       // middlewae
       console.log(`Request from ${req.originalUrl}`);
@@ -15,7 +19,8 @@ const routes = (app: Express) => {
     .post(addNewContact);
 
   app
-    .route("/contact/:contactId")
+    .route("/contacts/:contactId")
+    .get((req, res) => getContactById(req, res))
     .put((req, res) =>
       res.send(
         `PUT request was successful for contact: ${req.params.contactId}!`
