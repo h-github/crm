@@ -1,15 +1,18 @@
 import { Express } from "express-serve-static-core";
 
+import { addNewContact, getContacts } from "../controllers/crmController";
+
 const routes = (app: Express) => {
   app
     .route("/contact")
     .get((req, res, next) => {
       // middlewae
       console.log(`Request from ${req.originalUrl}`);
-      res.send("GET request was successful!");
-    })
+      console.log(`Request type ${req.method}`);
+      next();
+    }, getContacts)
 
-    .post((req, res) => res.send("POST request was successful!"));
+    .post(addNewContact);
 
   app
     .route("/contact/:contactId")
