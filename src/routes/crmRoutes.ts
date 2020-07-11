@@ -4,6 +4,7 @@ import {
   addNewContact,
   getContacts,
   getContactById,
+  updateContact,
 } from "../controllers/crmController";
 
 const routes = (app: Express) => {
@@ -21,11 +22,7 @@ const routes = (app: Express) => {
   app
     .route("/contacts/:contactId")
     .get((req, res) => getContactById(req, res))
-    .put((req, res) =>
-      res.send(
-        `PUT request was successful for contact: ${req.params.contactId}!`
-      )
-    )
+    .put(updateContact)
 
     .delete((req, res) =>
       res.send(
