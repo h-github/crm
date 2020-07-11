@@ -50,3 +50,13 @@ export const updateContact = (req: express.Request, res: express.Response) => {
     }
   );
 };
+
+export const deleteContact = (req: express.Request, res: express.Response) => {
+  Contact.findOneAndRemove({ _id: req.params.contactId }, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json({ message: "Successfully deleted contact" });
+  });
+};
